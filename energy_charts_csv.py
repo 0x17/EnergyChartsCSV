@@ -39,7 +39,7 @@ def get_second(list_of_pairs, first):
     return -1
 
 def timestamp_readable(ts):
-    return datetime.datetime.fromtimestamp(int(ts)/1000.0).strftime('%Y-%m-%d %H:%M:%S.%f')
+    return datetime.datetime.fromtimestamp(int(ts)/1000.0).strftime('%Y-%m-%d %A %H:%M:%S.%f')
 
 def main(args):
     obj = json.loads(slurp_url(url_from_args(args)))
