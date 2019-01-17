@@ -1,5 +1,5 @@
-# Usage 1: python energy_charts_csv.py 06.2015
-# Usage 2: python energy_charts_csv.py W4.2015
+# Usage 1: python energy_charts_csv.py 06.2015 [15|30]
+# Usage 2: python energy_charts_csv.py W4.2015 [15|30]
 
 import urllib.request
 import sys
@@ -9,16 +9,18 @@ import datetime
 
 
 def json_fn_from_args(args):
+    resolution = int(args[2]) if len(args) >= 3 and (args[2] == '15' or args[2] == '30') else None
+    res_str = f'{resolution}min_' if resolution is not None else ''
     parts = args[1].split('.')
     year = parts[1]
     if parts[0].startswith('W'):
         week = parts[0].replace('W', '')
         week = '0' + week if len(week) == 1 else week
-        return f'week_{year}_{week}.json'
+        return f'week_{res_str}{year}_{week}.json'
     else:
         month = parts[0]
         month = '0' + month if len(month) == 1 else month
-        return f'month_{year}_{month}.json'
+        return f'month_{res_str}{year}_{month}.json'
 
 
 def url_from_args(args):
